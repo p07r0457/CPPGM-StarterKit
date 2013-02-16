@@ -195,7 +195,7 @@ Produces an output of:
     preprocessing-op-or-punc 2 *=
     non-whitespace-character 1 @
     whitespace-sequence 0
-    string-literal 5 "bar"
+    string-literal 5 "baz"
     new-line 0 
     eof
 
@@ -257,7 +257,8 @@ The grammar for `preprocessing-token` is as follows with some notes added.  It i
         non-whitespace-character
 
     non-whitespace-character:
-        any single non-whitespace code point that does not fit into another preprocessing token
+        any single non-whitespace code point that does
+                not fit into another preprocessing token
 
 This is used so that garbage will still tokenize in some cases because the section it contains may be removed later anyway during preprocessing (by exclusion from an `#ifdef 0` or similar.  The test suite (as is the standard) is quite forgiving about whether a malformed token causes an error or gets parsed using `non-whitespace-character`.
 
