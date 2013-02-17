@@ -64,7 +64,7 @@ The _preprocessing_ phase takes as input a stream of `preprocessing-tokens`.  Ph
 
 It is your task in this assignment to implement these first three phases.  The `pptoken` application is a wrapper for them to fit the provided test suite.
 
-Please read _Clause 2: Lexical Conventions_ (pages 16 thru 32) of [the C++ standard (Nov 12 Working Draft - N3485)](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3485.pdf).
+Please read _Clause 2: Lexical Conventions_ (pages 16 through 32) of [the C++ standard (Nov 12 Working Draft - N3485)](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3485.pdf).
 
 ### Definition: Course Defined
 
@@ -76,7 +76,7 @@ In the remaining cases, it is up to each participant to choose for themselves.
 
 ### Definition: UTF-8
 
-If you already know how a Unicode code point is encoded and decoded into UTF-8, UTF-16 and UTF-32 than you can skip this definition.
+If you already know how a Unicode code point is encoded and decoded into UTF-8, UTF-16, and UTF-32, then you can skip this definition.
 
 The Unicode character set includes almost every character from every human language.
 
@@ -115,7 +115,7 @@ Decode each UTF-8 code unit sequence from the input file to its unicode code poi
 
 Convert any `universal-character-names` (escape sequences `\uXXXX` and `\UXXXXXXXX`) into their unicode code point.
 
-The nine three-character trigraphs sequences should be replaced using their single-character equivilants:
+The nine three-character trigraphs sequences should be replaced using their single-character equivalents:
 
     ??=  -->  #
     ??/  -->  \
@@ -129,7 +129,7 @@ The nine three-character trigraphs sequences should be replaced using their sing
 
 Line Splicing: If you encounter a backslash followed by a linefeed, ignore it.
 
-If the file doesn't end in a linefeed add one.
+If the file does not end in a linefeed add one.
 
 Comments (`/* ... */` and `// ...`) are replaced by a space character (ie they are part of a non-empty `whitespace-sequence`)
 
@@ -243,7 +243,7 @@ We will provide an interface that will allow you to submit your solution for gra
 
 ## Preprocessing Token Grammar Summary
 
-The grammar for `preprocessing-token` is as follows with some notes added.  It is functionally equivilant to the way it is presented in the standard, and mostly uses the same names:
+The grammar for `preprocessing-token` is as follows with some notes added.  It is functionally equivalent to the way it is presented in the standard, and mostly uses the same names:
 
     preprocessing-token:
         identifier
@@ -260,7 +260,7 @@ The grammar for `preprocessing-token` is as follows with some notes added.  It i
         any single non-whitespace code point that does
                 not fit into another preprocessing token
 
-This is used so that garbage will still tokenize in some cases because the section it contains may be removed later anyway during preprocessing (by exclusion from an `#ifdef 0` or similar.  The test suite (as is the standard) is quite forgiving about whether a malformed token causes an error or gets parsed using `non-whitespace-character`.
+This is used so that garbage will still tokenize in some cases because the section it contains may be removed later anyway during preprocessing (by exclusion from an `#if 0` or similar.  The test suite (as is the standard) is quite forgiving about whether a malformed token causes an error or gets parsed using `non-whitespace-character`.
 
     identifier:
         identifier-nondigit
@@ -274,39 +274,39 @@ This is used so that garbage will still tokenize in some cases because the secti
 An identifier may not start with code points from Annex E2.
 
     nondigit: one of
-        a b c d e f g h i j k l m
-        n o p q r s t u v w x y z
-        A B C D E F G H I J K L M
-        N O P Q R S T U V W X Y Z _
+        `a` `b` `c` `d` `e` `f` `g` `h` `i` `j` `k` `l` `m`
+        `n` `o` `p` `q` `r` `s` `t` `u` `v` `w` `x` `y` `z`
+        `A` `B` `C` `D` `E` `F` `G` `H` `I` `J` `K` `L` `M`
+        `N` `O` `P` `Q` `R` `S` `T` `U` `V` `W` `X` `Y` `Z` `_`
 
     digit: one of
-        0 1 2 3 4 5 6 7 8 9
+        `0` `1` `2` `3` `4` `5` `6` `7` `8` `9`
 
     pp-number:
         digit
-        . digit
+        `.` digit
         pp-number digit
         pp-number identifier-nondigit
-        pp-number e sign
-        pp-number E sign
-        pp-number .
+        pp-number `e` sign
+        pp-number `E` sign
+        pp-number `.`
 
     sign:
-        +
-        -
+        `+`
+        `-`
 
     character-literal:
-        ' c-char-sequence '
-        u' c-char-sequence '
-        U' c-char-sequence '
-        L' c-char-sequence '
+        `'` c-char-sequence `'`
+        `u'` c-char-sequence `'`
+        `U'` c-char-sequence `'`
+        `L'` c-char-sequence `'`
 
     c-char-sequence:
         c-char
         c-char-sequence c-char
 
     c-char:
-        any code point except ', \, or new-line
+        any code point except `'`, `\`, or new-line
         escape-sequence
 
     escape-sequence:
@@ -315,24 +315,24 @@ An identifier may not start with code points from Annex E2.
         hexadecimal-escape-sequence
 
     simple-escape-sequence: one of
-        \' \" \? \\ \a \b \f \n \r \t \v
+        `\'` `\"` `\?` `\\` `\a` `\b` `\f` `\n` `\r` `\t` `\v`
 
     octal-escape-sequence:
-        \ octal-digit
-        \ octal-digit octal-digit
-        \ octal-digit octal-digit octal-digit
+        `\` octal-digit
+        `\` octal-digit octal-digit
+        `\` octal-digit octal-digit octal-digit
 
     octal-digit: one of
-        0 1 2 3 4 5 6 7
+        `0` `1` `2` `3` `4` `5` `6` `7`
 
     hexadecimal-escape-sequence:
-        \x hexadecimal-digit
+        `\x` hexadecimal-digit
         hexadecimal-escape-sequence hexadecimal-digit
 
     hexadecimal-digit: one of
-        0 1 2 3 4 5 6 7 8 9
-        a b c d e f
-        A B C D E F
+        `0` `1` `2` `3` `4` `5` `6` `7` `8` `9`
+        `a` `b` `c` `d` `e` `f`
+        `A` `B` `C` `D` `E` `F`
         
     user-defined-character-literal:
         character-literal ud-suffix
@@ -341,29 +341,29 @@ An identifier may not start with code points from Annex E2.
         identifier
 
     string-literal:
-        ""
-        " s-char-sequence "
-        R raw-string
-        encoding-prefix ""
-        encoding-prefix " s-char-sequence "
-        encoding-prefix R raw-string
+        `""`
+        `"` s-char-sequence `"`
+        `R` raw-string
+        encoding-prefix `""`
+        encoding-prefix `"` s-char-sequence `"`
+        encoding-prefix `R` raw-string
 
     s-char-sequence:
         s-char
         s-char-sequence s-char
 
     s-char:
-        any code point except ", \, new-line
+        any code point except `"`, `\`, new-line
         escape-sequence
 
     encoding-prefix:
-        u8
-        u
-        U
-        L
+        `u8`
+        `u`
+        `U`
+        `L`
 
     raw-string:
-        " d-char-sequence ( r-char-sequence ) d-char-sequence "
+        `"` d-char-sequence `(` r-char-sequence `)` d-char-sequence `"`
 
 Note that in a raw string most of the early translations are switched off (see 2.5.3.1 and 2.14.5 in the standard).
 
@@ -372,7 +372,7 @@ Note that in a raw string most of the early translations are switched off (see 2
         d-char-sequence d-char
 
     d-char:
-        any code point except space, (, ), \, horizontal tab,
+        any code point except space, `(`, `)`, `\`, horizontal tab,
             vertical tab, form feed, and newline.
 
     r-char-sequence:
@@ -381,23 +381,23 @@ Note that in a raw string most of the early translations are switched off (see 2
 
     r-char:
         any code point, except a sequence that is
-            a right parenthesis ) followed by the initial
+            a right parenthesis `)` followed by the initial
             d-char-sequence (which may be empty) followed
-            by a double quote ".
+            by a double quote `"`.
 
     user-defined-string-literal:
         string-literal ud-suffix
 
     preprocessing-op-or-punc: one of
-        { } [ ] # ## ( ) <: :> <% %> %: %:%: ; : ...
-        new delete ? :: . .* + - * / % ˆ & | ~ ! = < >
-        += -= *= /= %= ˆ= &= |= << >> >>= <<= <= >= &&
-        || ++ -- , ->* -> and and_eq bitand bitor compl
-        not not_eq or or_eq xor xor_eq
+        `{` `}` `[` `]` `#` `##` `(` `)` `<: :>` `<%` `%>` `%:` `%:%:` `;` `:` `...`
+        `new` `delete` `?` `::` `.` `.*` `+` `-` `*` `/` `%` `ˆ` `&` `|` `~` `!` `=` `<` `>`
+        `+=` `-=` `*=` `/=` `%=` `ˆ=` `&=` `|=` `<<` `>>` `>>=` `<<=` `<=` `>=` `&&`
+        `||` `++` `--` `,` `->*` `->` `and` `and_eq` `bitand` `bitor` `compl`
+        `not` `not_eq` `or` `or_eq` `xor` `xor_eq`
 
     header-name:
-        < h-char-sequence >
-        " q-char-sequence "
+        `<` h-char-sequence `>`
+        `"` q-char-sequence `"`
 
 `header-names` are context sensetive.  They should only be tokenized after a sequence of (start of file or `new-line`) (`#` or `%:`) `include` ...disregarding `whitespace-sequences`.  Read section 16.2 in the standard to understand what is going on here.
 
@@ -406,18 +406,18 @@ Note that in a raw string most of the early translations are switched off (see 2
         h-char-sequence h-char
 
     h-char:
-        any code point except new-line and >
+        any code point except new-line and `>`
 
     q-char-sequence:
         q-char
         q-char-sequence q-char
 
     q-char:
-        any member of the source character set except new-line and "
+        any member of the source character set except new-line and `"`
 
     universal-character-name:
-        \u hex-quad
-        \U hex-quad hex-quad
+        `\u` hex-quad
+        `\U` hex-quad hex-quad
 
     hex-quad:
         hexadecimal-digit hexadecimal-digit hexadecimal-digit hexadecimal-digit
@@ -450,7 +450,7 @@ We will briefly mention each type:
 
     new-line
 
-This is trivial.  There are two states, the start state and end state.  The edge is a line feed (`'\n'`).
+This is trivial.  There are two states, the start state and end state.  The edge is a line feed.
 
     identifier
 
@@ -470,7 +470,7 @@ The is a character literal followed by an idenitifier, so you can just chain tho
 
     string-literal
 
-Similar to character-literal, except for raw string.  Raw string literals require special treatment in two ways.  First they need to go into a "raw mode" and turn off the early translations.  Secondly they terminate in an unusual way.  The standard provides us some leeway by saying than anything up to an opening `"` that could start a raw string literal (eg `R"`) will be a raw string literal.
+Similar to character-literal, except for raw string.  Raw string literals require special treatment in two ways.  First they need to go into a _raw mode_ and turn off the early translations.  Secondly they terminate in an unusual way.  The standard provides us some leeway by saying than anything up to an opening `"` that could start a raw string literal (eg `R"`) will be a raw string literal.
 
     user-defined-string-literal
 
@@ -478,7 +478,7 @@ Effectively a `string-literal` and an `identifier` chained together.
 
     preprocessing-op-or-punc
 
-For the identifier-like operators just ignore them for now.  You can emit them from the identifier DFA by checking them against a `set<string>`.  For example: Let `not_eq` be initially tokenized as an identifier, but before you emit it, check if they are in the set of indentifier-like operators.  If it is emit it as a `preprocessing-op-or-punc` instead of `identifier`.
+For the identifier-like operators just ignore them for now.  You can emit them from the identifier DFA by checking them against a `set<string>`.  For example: Let `not_eq` be initially tokenized as an identifier, but before you emit it, check if they are in the set of indentifier-like operators.  If it is, emit it as a `preprocessing-op-or-punc` instead of `identifier`.
 
 For the rest form a DFA.  It will have many states.  Maybe separate it out into different diagrams for each leading character.
 
@@ -488,23 +488,23 @@ Also note that there is a special exception for `<::` which parses as `<` then `
 
     whitespace-sequence
 
-We recommend subsuming comments into this production rather than replacing them with a single space.  The start and end states should be connected by non-new-line whitespace.  If you encounter `/` followed by `*` enter into "inline comment state", if you encounter `/` followed by `/` enter into "single line comment state".  Exit them as described in the standard.
+We recommend subsuming comments into this production rather than replacing them with a single space.  The start and end states should be connected by non-new-line whitespace.  If you encounter `/` followed by `*`, enter _inline comment state_; if you encounter `/` followed by `/`, enter _single line comment state_.  Exit them as described in the standard.
 
     header-name
 
-This is straightforward, just follow the grammar.  However it should only be considered in certain contexts as described earlier.
+This is straightforward, just follow the grammar.  However, it should only be considered in certain contexts as described earlier.
 
     each non-white-space character that cannot be one of the above
 
-This is simple.  If you can't tokenize a sequence just emit each code point in this category.  We will also permit (as does the standard) to simply error in many of these cases.
+This is simple.  If you cannot tokenize a sequence, just emit each code point in this category.  We will also permit (as does the standard) to simply error in many of these cases.
 
-Now that you have all the DFAs you will combine them into a single state machine with lookahead.  The state machine starts in the `start` state.  It will receive the stream of code points from the translation tasks.  Based on the lookahead it will enter one of the DFAs above.  In some cases there will still be ambiguity so you will need to make a decision based on lookahead.  For example `u8` can be an identifier, it can also be the `encoding-prefix` of a `string-literal`.  So at the end of identifier `u8` if the lookahead is `"` then enter the `string-literal` DFA - if not emit `u8` as an `identifier` and return to the `start` state.  Similarly at the end of `character-literal`, if the lookahead is a valid `identifier` start, than enter `user-defined-character-literal`, otherwise emit the `character-literal`.
+Now that you have all the DFAs you will combine them into a single state machine with look-ahead.  The state machine starts in the `start` state.  It will receive the stream of code points from the translation tasks.  Based on the look-ahead it will enter one of the DFAs above.  In some cases there will still be ambiguity so you will need to make a decision based on look-ahead.  For example `u8` can be an identifier, it can also be the `encoding-prefix` of a `string-literal`.  So, at the end of identifier `u8`, if the look-ahead is `"` then enter the `string-literal` DFA, otherwise emit `u8` as an `identifier` and return to the `start` state.  Similarly at the end of `character-literal`, if the look-ahead is a valid `identifier` start, than enter `user-defined-character-literal`, otherwise emit the `character-literal`.
 
-Also there is some cross-over between `whitespace-sequence` comment starts `//`, and `/*` and the divide and divide assign operators `/` and `/=`.  You can deal with that by combining the DFAs.  For example you might create a state `forward-slash` that indicates the last seen code point is `/`, then based on lookahead either enter the operator DFA or the whitespace/comment DFA.
+Also, there is some cross-over between `whitespace-sequence` comment starts `//`, and `/*` and the divide and divide-assign operators `/` and `/=`.  You can deal with that by combining the DFAs.  For example you might create a state `forward-slash` that indicates the last seen code point is `/`, then based on lookahead either enter the operator DFA or the whitespace/comment DFA.
 
-Usually you will need to match the longest token (some exceptions are comments, raw strings and the `<` `::` case).  So greedily "keep going" in the state machine until you can't go and further, then emit the discovered token and return to the start state.
+Usually you will need to match the longest token (some exceptions are comments, raw strings and the `<` `::` case).  So greedily "keep going" in the state machine until you cannot go and further, then emit the discovered token and return to the start state.
 
-To emit a token there is an interface provided in the skeleton code called `IPPTokenStream`.  It has one function for each token type.  In most cases you will need to store and then UTF-8 encode the code point sequence corresponding to the token to pass to the data argument.  The token data is expected to have the translation tasks applied (for one example "line splicing"), but not the literal tasks (for example decoding `simple-escape-sequences` is not required at this stage) (which occur later in translation phase 7 and is not part of this assignment).
+To emit a token there is an interface provided in the skeleton code called `IPPTokenStream`.  It has one function for each token type.  In most cases you will need to store and then UTF-8 encode the code point sequence corresponding to the token to pass to the data argument.  The token data is expected to have the translation tasks applied (for one example _line splicing_), but not the literal tasks (for example decoding `simple-escape-sequences` is not required at this stage) (which occur later in translation phase 7 and is not part of this assignment).
 
 ### Extra Credit (Optional/Ungraded)
 
