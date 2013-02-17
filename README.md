@@ -260,7 +260,7 @@ The grammar for `preprocessing-token` is as follows with some notes added.  It i
         any single non-whitespace code point that does
                 not fit into another preprocessing token
 
-This is used so that garbage will still tokenize in some cases because the section it contains may be removed later anyway during preprocessing (by exclusion from an `#if 0` or similar.  The test suite (as is the standard) is quite forgiving about whether a malformed token causes an error or gets parsed using `non-whitespace-character`.
+This is used so that garbage will still tokenize in some cases because the section it contains may be removed later anyway during preprocessing (by exclusion from an `#if 0` or similar).  The test suite (as is the standard) is quite forgiving about whether a malformed token causes an error or gets parsed using `non-whitespace-character`.
 
     identifier:
         identifier-nondigit
@@ -389,7 +389,7 @@ Note that in a raw string most of the early translations are switched off (see 2
         string-literal ud-suffix
 
     preprocessing-op-or-punc: one of
-        `{` `}` `[` `]` `#` `##` `(` `)` `<: :>` `<%` `%>` `%:` `%:%:` `;` `:` `...`
+        `{` `}` `[` `]` `#` `##` `(` `)` `<:` `:>` `<%` `%>` `%:` `%:%:` `;` `:` `...`
         `new` `delete` `?` `::` `.` `.*` `+` `-` `*` `/` `%` `ˆ` `&` `|` `~` `!` `=` `<` `>`
         `+=` `-=` `*=` `/=` `%=` `ˆ=` `&=` `|=` `<<` `>>` `>>=` `<<=` `<=` `>=` `&&`
         `||` `++` `--` `,` `->*` `->` `and` `and_eq` `bitand` `bitor` `compl`
