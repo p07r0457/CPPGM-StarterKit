@@ -1,64 +1,14 @@
 ## CPPGM Programming Assignment 1 (pptoken)
 
-© 2013 CPPGM Foundation <www.cppgm.org>. All Rights Reserved.
-
-Version 1.0.12
-
 ### Overview
 
 Write a C++ application called `pptoken` that accepts a _C++ Source File_ on standard input, executes phases 1, 2 and 3 of the _Phases of Translation_ (defined below), and describes the resulting sequence of `preprocessing-tokens` to standard output in the specified format.
-
-### Development Environment
-
-The grading servers run on _Ubuntu 12.10 64-bit_ with the default Ubuntu server packages and only additionally the `build-essential` package installed as a bootstrap toolchain:
-
-    $ sudo apt-get install build-essential
-
-It is recommended that you setup your developer machine with an identical environment.
-
-### Starter Kit
-
-The starter kit can be obtained from:
-
-    $ git clone git://git.cppgm.org/pa1.git
-
-### Restrictions
-
-You may only depend upon the C++ standard library and what is already included in this skeleton code.  No additional third party libraries/tools dependencies may used.
-
-You may not submit intermediate computer-generated code.  (You may submit original source code for a tool that is built and generates code during the build process - although that is _not recommended_ for this assignment.)
-
-We require that you agree to not publish your solution to this programming assignment as a condition of taking this assignment.  You are free to discuss the design in general terms, but please do not share code.
-
-### Input Format
-
-The C++ Source File shall be read from standard input `std::cin` in UTF-8 format.
-
-The _source character set_ and the _execution character set_ shall be _course defined_ (defined below) as UTF-8.  Line endings are UNIX - a single LF (0x0A).
-
-### Error Reporting
-
-If an error occurs in `pptoken` you should print a helpful error message to `std::cerr` and `main` should `return EXIT_FAILURE`.  The test harness will interpret `EXIT_FAILURE` as indicating that the C++ Source File is _ill-formed_.
-
-Internally you may throw an exception and put a catch handler in `main` that then returns failure.  The skeleton code is already setup like this.
-
-### Output Format
-
-`pptoken` shall write to standard output the following in UTF-8 format:
-
-For each token in the sequence, one line shall be printed consisting of 3 space-character separated elements.
-
-The first element is the _Token Type_ (defined below).  The next is an integer N which is the byte length of the _Token Data_ (defined below).  The last is the N bytes of the Token Data.
-
-At the end of the output `pptoken` should print `eof` on a line by itself.
-
-There is an interface and implementation in the skeleton code you can use, called `IPPTokenStream` and `DebugPPTokenStream` respectively, that will produce the correct output format for you.
 
 ### Definition: Phases of Translation
 
 The overall process of taking source files and producing compiled programs is broken down into 9 phases of translation.
 
-Translation phase 4 is called _preprocessing_.  The preprocessing phase applies preprocessing directives like `#include`, `#define`, `#ifdef` and so on.
+Translation phase 4 is called _preprocessing_.  The preprocessing phase applies preprocessing directives like `#include`, `#define`, `#ifdef`, and so on.
 
 The _preprocessing_ phase takes as input a stream of `preprocessing-tokens`.  Phases 1 through 3 are about taking a physical source file and decomposing it into those tokens.  They are essentially the "preprocessors tokenizer".
 
@@ -66,13 +16,19 @@ It is your task in this assignment to implement these first three phases.  The `
 
 Please read _Clause 2: Lexical Conventions_ (pages 16 through 32) of [the C++ standard (Nov 12 Working Draft - N3485)](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3485.pdf).
 
-### Definition: Course Defined
+### Starter Kit
 
-In the standard there are a number of cases that are called _implementation defined_, meaning it is up to the toolchain author what to choose in that case.
+The starter kit can be obtained from:
 
-In some of those cases we will define them as the same for everybody taking this course.  We will say such a case is _course defined_.
+    $ git clone git://git.cppgm.org/pa1.git
 
-In the remaining cases, it is up to each participant to choose for themselves.
+It contains a stub implementation of pptoken, a compiled reference implementation and a test suite.
+
+### Input Format
+
+The C++ Source File shall be read from standard input `std::cin` in UTF-8 format.
+
+The _source character set_ and the _execution character set_ shall be _course defined_ (defined below) as UTF-8.  Line endings are UNIX - a single LF (0x0A).
 
 ### Definition: UTF-8
 
@@ -106,6 +62,48 @@ The two algorithms are described here:
 
 1. [UTF-8: http://tools.ietf.org/html/rfc3629#page-4](http://tools.ietf.org/html/rfc3629#page-4)
 2. [UTF-16: http://tools.ietf.org/html/rfc2781#section-2](http://tools.ietf.org/html/rfc2781#section-2)
+
+### Error Reporting
+
+If an error occurs in `pptoken` you should print a helpful error message to `std::cerr` and `main` should `return EXIT_FAILURE`.  The test harness will interpret `EXIT_FAILURE` as indicating that the C++ Source File is _ill-formed_.
+
+Internally you may throw an exception and put a catch handler in `main` that then returns failure.  The skeleton code is already setup like this.
+
+### Development Environment
+
+The grading servers run on _Ubuntu 12.10 64-bit_ with the default Ubuntu server packages and only additionally the `build-essential` package installed as a bootstrap toolchain:
+
+    $ sudo apt-get install build-essential
+
+It is recommended that you setup your developer machine with an identical environment.
+
+### Restrictions
+
+You may only depend upon the C++ standard library and what is already included in this skeleton code.  No additional third party libraries/tools dependencies may used.
+
+You may not submit intermediate computer-generated code.  (You may submit original source code for a tool that is built and generates code during the build process - although that is _not recommended_ for this assignment.)
+
+We require that you agree to not publish your solution to this programming assignment as a condition of taking this assignment.  You are free to discuss the design in general terms, but please do not share code.
+
+### Output Format
+
+`pptoken` shall write to standard output the following in UTF-8 format:
+
+For each token in the sequence, one line shall be printed consisting of 3 space-character separated elements.
+
+The first element is the _Token Type_ (defined below).  The next is an integer N which is the byte length of the _Token Data_ (defined below).  The last is the N bytes of the Token Data.
+
+At the end of the output `pptoken` should print `eof` on a line by itself.
+
+There is an interface and implementation in the skeleton code you can use, called `IPPTokenStream` and `DebugPPTokenStream` respectively, that will produce the correct output format for you.
+
+### Definition: Course Defined
+
+In the standard there are a number of cases that are called _implementation defined_, meaning it is up to the toolchain author what to choose in that case.
+
+In some of those cases we will define them as the same for everybody taking this course.  We will say such a case is _course defined_.
+
+In the remaining cases, it is up to each participant to choose for themselves.
 
 ### Features
 
@@ -506,10 +504,11 @@ Usually you will need to match the longest token (some exceptions are comments, 
 
 To emit a token there is an interface provided in the skeleton code called `IPPTokenStream`.  It has one function for each token type.  In most cases you will need to store and then UTF-8 encode the code point sequence corresponding to the token to pass to the data argument.  The token data is expected to have the translation tasks applied (for one example _line splicing_), but not the literal tasks (for example decoding `simple-escape-sequences` is not required at this stage) (which occur later in translation phase 7 and is not part of this assignment).
 
-### Extra Credit (Optional/Ungraded)
+### Self-Tokenizing (Optional/Ungraded)
 
 To get into the self-hosting spirit of things, once you have completed this assignment run your `pptoken` application using your `pptoken.cpp` source file as input:
 
     $ .pptoken < pptoken.cpp > pptoken.my
 
-And compare by hand the `pptoken.cpp` file to the output `pptoken.my` to check it tokenized correctly.
+And compare by hand some of the `pptoken.cpp` file to the output in `pptoken.my` to check it tokenized correctly.
+
