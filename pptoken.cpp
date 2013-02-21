@@ -170,7 +170,10 @@ int main()
 		PPTokenizer tokenizer(output);
 
 		for (char c : input)
-			tokenizer.process(c);
+		{
+			unsigned char code_unit = c;
+			tokenizer.process(code_unit);
+		}
 
 		tokenizer.process(EndOfFile);
 	}
