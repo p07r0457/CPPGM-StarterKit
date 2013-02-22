@@ -442,7 +442,7 @@ In order to support raw mode in raw string literals it is necessary to be able t
 
 Now we describe the tokenization part.
 
-Start by drawing a DFA (deterministic finite automaton) for each token type.  Recall that a DFA is a directed acyclic graph where the vertexes are states and the edges are code points (or sets of code points).
+Start by drawing a DFA (deterministic finite automaton) for each token type.  Recall that a DFA is a directed graph where the vertexes are states and the edges are code points (or sets of code points).
 
 We will briefly mention each type:
 
