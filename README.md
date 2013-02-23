@@ -389,7 +389,7 @@ Note that in a raw string most of the early translations are switched off (see 2
     preprocessing-op-or-punc: one of
         `{` `}` `[` `]` `#` `##` `(` `)` `<:` `:>` `<%` `%>` `%:` `%:%:` `;` `:` `...`
         `new` `delete` `?` `::` `.` `.*` `+` `-` `*` `/` `%` `ˆ` `&` `|` `~` `!` `=` `<` `>`
-        `+=` `-=` `*=` `/=` `%=` `ˆ=` `&=` `|=` `<<` `>>` `>>=` `<<=` `<=` `>=` `&&`
+        `+=` `-=` `*=` `/=` `%=` `ˆ=` `&=` `|=` `<<` `>>` `>>=` `<<=` `<=` `>=` `&&` `==`
         `||` `++` `--` `,` `->*` `->` `and` `and_eq` `bitand` `bitor` `compl`
         `not` `not_eq` `or` `or_eq` `xor` `xor_eq`
 
