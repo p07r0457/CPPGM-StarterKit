@@ -257,8 +257,11 @@ The grammar for `preprocessing-token` is as follows with some notes added.  It i
     non-whitespace-character:
         any single non-whitespace code point that does
                 not fit into another preprocessing token
+                except `'` and `"`
 
 This is used so that garbage will still tokenize in some cases because the section it contains may be removed later anyway during preprocessing (by exclusion from an `#if 0` or similar).  The test suite (as is the standard) is quite forgiving about whether a malformed token causes an error or gets parsed using `non-whitespace-character`.
+
+It is _course defined_ that `'` and `"` do not match `non-whitespace-character`. This is a standard-compliant feature (see 2.5.2).
 
     identifier:
         identifier-nondigit
