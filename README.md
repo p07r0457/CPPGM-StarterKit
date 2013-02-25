@@ -482,7 +482,12 @@ For the rest form a DFA.  It will have many states.  Maybe separate it out into 
 
 For example a leading character of `<` could result in `<<`, `<%`, `<=`, `<<=`, `<:`.  If we see another `<` (so `<<` so far) we still need a third state to decide between `<<=` and `<<`.
 
-Also note that there is a special exception for `<::` which parses as `<` then `::`, not `<:` then `:`.  We recommend dealing with this by adding a synthetic surrogate operator `<::` and then emitting the appropriate two operators (instead of one) when it matches.
+Also note that there is a special exception involving the sequence `<::`:
+
+> 2.5.3: ...if the next three characters are `<::` and the subsequent character is neither `:` nor `>`, the `<`
+is treated as a preprocessor token by itself and not as the first character of the alternative token `<:`
+
+One way to deal with this by adding three surrogate operators `<::`, `<::>` and `<:::` to your DFA, and when you find one of these, rather than emiting them as one token, emit the two appropriate for each case.  You may need to reread 2.5.3 a couple of times before this is clear.
 
     whitespace-sequence
 
